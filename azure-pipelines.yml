@@ -1,0 +1,80 @@
+
+trigger:
+- master 
+pool:
+      name: Default
+      demands:
+       - agent.os -equals Linux 
+
+variables:
+- name: containerName
+  value: product 
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK'
+  inputs:
+    version: 5.0.x
+    performMultiLevelLookup: true
+
+
+- task: DotNetCoreCLI@2
+  displayName: 'Restore'
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+    restoreArguments: '--no-cache'
+    feedsToUse: 'select'
+    vstsFeed: '94d645ec-8620-4b1b-b96d-6c7d9a212a3b/fd7b8db0-12c9-4360-a6bd-c2c9fe7e71de'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+- task: DotNetCoreCLI@2
+  displayName: 'Publish'
+  inputs:
+    command: 'publish'    
+    arguments: '--configuration Release -o $(Build.ArtifactStagingDirectory)'
+    publishWebProjects: true
+    zipAfterPublish: false
+
+- task: CmdLine@2
+  displayName: 'Generate Db Script File'
+  inputs:
+    script: 'dotnet ef migrations script --configuration Debug --no-build --idempotent --output $(Build.ArtifactStagingDirectory)/migrations.sql'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/src/$(Build.Repository.Name)'
+
+- task: CopyFiles@2
+  displayName: 'Copy Dockerfile'
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: '**/Dockerfile'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
+    flattenFolders: true
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name)'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/publish/bin/Release/net5.0/publish'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Regis Cloudware'
+    repository: 'cloudware/$(containerName)'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    buildContext: '$(Build.ArtifactStagingDirectory)/publish'
+    tags: |
+      $(Build.BuildId)
+      latest
+
+- task: PublishBuildArtifacts@1
+  displayName: 'PublishBuildArtifacts migrations.sql'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/migrations.sql'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+

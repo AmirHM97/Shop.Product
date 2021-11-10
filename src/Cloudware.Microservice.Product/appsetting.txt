@@ -1,0 +1,49 @@
+{
+  "ConnectionStrings": {.
+    "ProductConnectionString": "Server=81.28.58.74;Database=Cloudware.Microservice.ProductDb;Trusted_Connection=false;User Id=sa;Password=6692110@Sql",
+   "ProductConnectionString": "Server=192.168.1.36;Database=Cloudware.Microservices.ProductDb;Trusted_Connection=false;User Id=sa;Password=107747@Sql",
+    "ProductConnectionString": "Data Source=sql.cloudware.ir;Initial Catalog=Cloudware.Microservices.ProductDb;Integrated Security=False;User ID=sa;Password=107747@sql;MultipleActiveResultSets=True",
+   "MongoConnectionString": "mongodb://admin:107747@192.168.1.36:27017",
+    "MongoConnectionString": "mongodb://admin:1077476692110@81.28.58.85:60217",
+    "MongoDatabase": "ProductReadDb"
+
+    "MsSql": "Data Source=sql.cloudware.ir;Initial Catalog=Cloudware.Microservice.Product;Integrated Security=False;User ID=sa;Password=107747@sql;MultipleActiveResultSets=True",
+    "MsSql": "Data Source=sql.cloudware.ir;Initial Catalog=Cloudware.Microservices.ProductDb;Integrated Security=False;User ID=sa;Password=107747@sql;MultipleActiveResultSets=True",
+    "MongoDb": "mongodb://admin:107747@188.213.65.71:60217/Cloudware-Microservice-Product"
+
+    "MsSql": "Server=192.168.1.36;Database=Cloudware.Microservice.ProductDb;Trusted_Connection=false;User Id=sa;Password=107747@Sql",
+    "MongoDb": "mongodb://admin:107747@192.168.1.36:27017/ProductReadDb"
+
+
+
+     "MsSql": "Data Source=sql.cloudware.ir;Initial Catalog=Cloudware.Microservice.Product;Integrated Security=False;User ID=sa;Password=107747@sql;MultipleActiveResultSets=True",
+ 
+    "MongoDb": "mongodb://admin:107747@188.213.65.71:60217/Cloudware-Microservice-Product"
+
+  },
+  "MassTransit": {
+   "Host": "rabbitmq://188.213.65.71",
+    "Host": "rabbitmq://192.168.1.36",
+    "Username": "admin",
+    "Password": "107747@Rabbit"
+  },
+  "Identity": {
+   "Url": "http://clw.cloudware.ir/idp"
+    "Url": "http://192.168.1.35:6001"
+   "Url": "https://api.kookbaz.ir/idp"
+      "Url": "http://188.213.65.84:6001"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    },
+    "elasticsearch": {
+      "url": "http://192.168.1.36:9200/",
+      "username": "elastic",
+      "password": "107747@Elastic"
+    }
+  },
+  "AllowedHosts": "*"
+}

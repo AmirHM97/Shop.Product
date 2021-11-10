@@ -1,0 +1,175 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "rebuild",
+        "dependsOrder": "sequence",
+        "dependsOn": [
+          "clean",
+          "build"
+        ]
+      },
+      {
+        "label": "clean",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "clean",
+          "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "label": "restore",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "restore",
+          "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "label": "build",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      },
+      {
+        "label": "publish win-x64",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "publish",
+          "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj",
+          "--configuration",
+          "Release",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary",
+          "--runtime",
+          "win-x64",
+          "--self-contained",
+          "false"
+        ],
+        "problemMatcher": "$msCompile",
+        "dependsOn": "clean"
+      },
+      {
+        "label": "publish linux-x64",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "publish",
+          "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj",
+          "--configuration",
+          "Release",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary",
+          "--runtime",
+          "linux-x64",
+          "--self-contained",
+          "false"
+        ],
+        "problemMatcher": "$msCompile",
+        "dependsOn": "clean"
+      },
+      {
+        "label": "watch",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "watch",
+          "run",
+          "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "type": "docker-build",
+        "label": "docker-build: debug",
+        "dependsOn": [
+          "build"
+        ],
+        "dockerBuild": {
+          "tag": "cloudwaremicroservicebitboxcoininformation:dev",
+          "target": "base",
+          "dockerfile": "${workspaceFolder}/Cloudware.Worker.Bitbox.Wallet/Dockerfile",
+          "context": "${workspaceFolder}",
+          "pull": true
+        },
+        "netCore": {
+          "appProject": "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj"
+        }
+      },
+      {
+        "type": "docker-build",
+        "label": "docker-build: release",
+        "dependsOn": [
+          "build"
+        ],
+        "dockerBuild": {
+          "tag": "cloudwaremicroservicebitboxcoininformation:latest",
+          "dockerfile": "${workspaceFolder}/Cloudware.Worker.Bitbox.Wallet/Dockerfile",
+          "context": "${workspaceFolder}",
+          "pull": true
+        },
+        "netCore": {
+          "appProject": "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj"
+        }
+      },
+      {
+        "type": "docker-run",
+        "label": "docker-run: debug",
+        "dependsOn": [
+          "docker-build: debug"
+        ],
+        "dockerRun": {},
+        "netCore": {
+          "appProject": "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj",
+          "enableDebugging": true
+        }
+      },
+      {
+        "type": "docker-run",
+        "label": "docker-run: release",
+        "dependsOn": [
+          "docker-build: release"
+        ],
+        "dockerRun": {},
+        "netCore": {
+          "appProject": "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj"
+        }
+      },
+      {
+        "label": "publish",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "publish",
+          "${workspaceFolder}/src/Cloudware.Microservice.Product/Cloudware.Microservice.Product.csproj",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary"
+        ],
+        "problemMatcher": "$msCompile"
+      }
+    ]
+  }
+  

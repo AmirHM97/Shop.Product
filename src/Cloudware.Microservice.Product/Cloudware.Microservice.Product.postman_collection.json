@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "bb860a2c-80d6-4ddc-b5c8-52367f6a11d4",
+		"name": "Cloudware.Microservice.Product",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api/Product",
+			"item": [
+				{
+					"name": "/api/Product/GetProductById/:productId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44325/api/Product/GetProductById/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44325",
+							"path": [
+								"api",
+								"Product",
+								"GetProductById",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/api/Product/GetProductById/:productId",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44325/api/Product/GetProductById/4",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44325",
+									"path": [
+										"api",
+										"Product",
+										"GetProductById",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Jan 2021 14:54:10 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"UserId\": 1,\n    \"Name\": \"product1\",\n    \"ImageUrl\": \"imageUrl\",\n    \"ImageUrls\": [\n        \"img4\",\n        \"img44\",\n        \"img444\"\n    ],\n    \"ViewCount\": 1,\n    \"Weight\": 23,\n    \"Description\": \"some description\",\n    \"Story\": \"some story\",\n    \"Dimensions\": 111,\n    \"BrandName\": \"brand1\",\n    \"CategoryName\": \"category1\",\n    \"PropertiesDto\": [\n        {\n            \"Name\": \"Color\",\n            \"PropertyItemDtos\": [\n                {\n                    \"Id\": 1,\n                    \"Name\": \"Red\"\n                },\n                {\n                    \"Id\": 3,\n                    \"Name\": \"Blue\"\n                },\n                {\n                    \"Id\": 4,\n                    \"Name\": \"yellow\"\n                }\n            ]\n        },\n        {\n            \"Name\": \"Guarantee\",\n            \"PropertyItemDtos\": [\n                {\n                    \"Id\": 5,\n                    \"Name\": \"g1\"\n                },\n                {\n                    \"Id\": 6,\n                    \"Name\": \"g2\"\n                }\n            ]\n        }\n    ],\n    \"StockItemsDto\": [\n        {\n            \"Count\": 4,\n            \"Price\": 1000,\n            \"PropItems\": [\n                1,\n                5\n            ]\n        },\n        {\n            \"Count\": 3,\n            \"Price\": 233444,\n            \"PropItems\": [\n                3,\n                5\n            ]\n        },\n        {\n            \"Count\": 2,\n            \"Price\": 10000,\n            \"PropItems\": [\n                5,\n                6\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Product/GetProductById/:productId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Product",
+										"GetProductById",
+										":productId"
+									],
+									"variable": [
+										{
+											"key": "productId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Product/GetProductsByCategoryId/:categoryId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Product/GetProductsByCategoryId/:categoryId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Product",
+								"GetProductsByCategoryId",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": "<integer>",
+									"type": "string",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/api/Product/GetProductsByCategoryId/:categoryId",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44325/api/Product/GetProductsByCategoryId/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44325",
+									"path": [
+										"api",
+										"Product",
+										"GetProductsByCategoryId",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Jan 2021 14:55:10 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "[{\"image\":\"imageUrl\",\"Name\":\"product1\",\"Price\":1000.00},{\"image\":\"imageurl3\",\"Name\":\"product3\",\"Price\":0.00}]"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Product/GetProductsByCategoryId/:categoryId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Product",
+										"GetProductsByCategoryId",
+										":categoryId"
+									],
+									"variable": [
+										{
+											"key": "categoryId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}
